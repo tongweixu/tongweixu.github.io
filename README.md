@@ -67,3 +67,13 @@ dns 解析：浏览器缓存->操作系统hosts文件->本地域名服务器->�
 一个TCP报文最多传输多少字节(即MSS)？
 答案：1440 字节
 窗口大小 16位 65536字节
+
+spring aop：面向切面的编程范式，切面切入，切面通知逻辑处理，jdk动态代理（代理接口），cglib(类与接口)
+spring ioc：控制反转，将需要在代码中实现的对象的创建，对象的依赖关系反转给ioc容器实现，ioc容器通过xml,注解，配置类等方式完成对对象的创建和依赖关系的注入。
+spring bean生命周期:实例化（依赖无参构造函数） -> 属性赋值 -> 初始化 -> 销毁
+spring bean循环依赖：1、构造器循环依赖,srping 无法解决，抛出BeanCurrentlyInCreationException
+                    2、【setter循环依赖】field属性的循环依赖【setter方式 单例，默认方式-->通过递归方法找出当前Bean所依赖的Bean，然后提前缓存【会放入Cach中】起来。通过提前暴露 -->暴露一个                          exposedObject用于返回提前暴露的Bean。】
+                    3、autowired 反射注入。
+spring bean 作用域：singleton 单例、prototype 每次从容器中获取创建新的、request 每次http请求创建新的bean,session,@scope
+适配器模式：目标接口，被适配类，适配类
+spring 中涉及的设计模式：单例（spring bean 作用域），工厂模式（ioc）, 代理（aop）,适配器模式（springmvc）
