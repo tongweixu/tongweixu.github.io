@@ -22,6 +22,8 @@ redis 缓存穿透：不存在的key,布隆过滤器(bitmap，key多个hash函�
 redis 雪崩：redis 宕机，大量key失效。限流，服务熔断降级，缓存高可用（hystrix熔断降级）。
 redis 击穿：大量用户访问同一个key。热key永不过期，互斥锁查数据库。
 redis 缓存一直性：1、更新db,更新缓存  2、更db，删缓存（缓存刚好失效，读比写慢,大部分实现） 3、延时双删（也会有问题）4、数据库binlog同步 
+redis 热key问题：1、二级缓存，jvm hashmap（ehcache） 2、备份热key + 随机数，落到不同节点。
+redis redlock 算法，单点故障。一半实例获取锁，ttl获取所有锁的时间，获取锁有时间限制，获取锁-开始时间要小于获取所有锁的时间。
 
 Innodb: 分聚集索引，非聚集索引，非聚集索引子节点存放聚集随意主键；支持事务，支持外键，支持行锁，不支持全文索引。
 Myisam:非聚集索引子节点指向数据文件记录。
@@ -77,3 +79,4 @@ spring bean循环依赖：1、构造器循环依赖,srping 无法解决，抛出
 spring bean 作用域：singleton 单例、prototype 每次从容器中获取创建新的、request 每次http请求创建新的bean,session,@scope
 适配器模式：目标接口，被适配类，适配类
 spring 中涉及的设计模式：单例（spring bean 作用域），工厂模式（ioc）, 代理（aop）,适配器模式（springmvc）
+concurrenthashmap 1.7 segment 分段锁；1.8 没有hash冲突扩容cas + 冲突 synchronized + 线程去帮助扩容，红黑树。
