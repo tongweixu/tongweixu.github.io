@@ -85,3 +85,21 @@ hashcode hashcode ^ hashcode >>> 16  (n-1) & hashcode
 
 k8s: yaml(kind(depolyment)，镜像image, replicas副本数量，动态扩缩容（scale,replicas)
 docker:from(基础镜像)，copy,add，maintainer（所有者），run, cmd
+
+1. JVM栈 (Java Virtual Machine Stacks) 
+
+ 每当启动一个新线程的时候，java虚拟机都会为它分配一个java栈。java以栈帧为单位保存线程的运行状态。虚拟机只会对java栈执行两种操作：以栈帧为单位的压栈或者出栈。
+
+每个线程包含一个栈区，栈中只保存基础数据类型的对象和自定义对象的引用(不是对象)，对象都存放在堆区中 。
+
+每个栈中的数据(原始类型和对象引用)都是私有的，其他栈不能访问。 
+
+栈分为3个部分：基本类型变量区、执行环境上下文、操作指令区(存放操作指令)。
+
+2. 堆内存 (Heap Memory) 
+
+存储的全部是对象，每个对象包含一个与之对应的class信息–class的目的是得到操作指令。
+
+jvm只有一个堆区（heap）被所有线程共享，堆区中不存放基本类型和对象引用，只存放对象本身。  
+
+堆的优势是可以动态地分配内存大小，生存期也不必事先告诉编译器，因为它是在运行时动态分配内存的，Java的垃圾收集器会自动收走这些不再使用的数据。 
