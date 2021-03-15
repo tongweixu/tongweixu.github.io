@@ -80,3 +80,8 @@ spring bean 作用域：singleton 单例、prototype 每次从容器中获取创
 适配器模式：目标接口，被适配类，适配类
 spring 中涉及的设计模式：单例（spring bean 作用域），工厂模式（ioc）, 代理（aop）,适配器模式（springmvc）
 concurrenthashmap 1.7 segment 分段锁；1.8 没有hash冲突扩容cas + 冲突 synchronized + 线程去帮助扩容，红黑树。
+hashmap 1.7 头插法 成环，hashmap 1.8 尾插法
+hashcode hashcode ^ hashcode >>> 16  (n-1) & hashcode  
+
+k8s: yaml(kind(depolyment)，镜像image, replicas副本数量，动态扩缩容（scale,replicas)
+docker:from(基础镜像)，copy,add，maintainer（所有者），run, cmd
