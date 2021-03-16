@@ -10,6 +10,9 @@ reentrantlock 非公平：cas先获取一遍锁
               可中断：lockInterruptibly()方法获取到一个可重入锁，并执行一个长时间的任务，另一个线程通过interrupt()方法就可以立刻打断t1线程的执行，来获取t1持有的那个可重入锁
               可重入：volatile 状态量+1
               独占锁：只能有 一个线程可 以 获取该锁,其他获取该锁 的线程会被阻塞而被放入该锁的 AQS 阻塞队列里面
+              
+ReentrantReadWriteLock：读读不互斥，aqs,高16位表示当前读锁的占有量，低16位表示写锁的占有量。
+锁降级中读锁的获取是否必要呢？答案是必要的。主要是为了保证数据的可见性，如果当前线程不获取读锁而是直接释放写锁， 假设此刻另一个线程（记作线程T）获取了写锁并修改了数据，那么当前线程无法感知线程T的数据更新。如果当前线程获取读锁，即遵循锁降级的步骤，则线程T将会被阻塞，直到当前线程使用数据并释放读锁之后，线程T才能获取写锁进行数据更新。
 
 volatile: 内存屏障（load读 store写，刷主内存，防重排序）可见性，i++ 读，写非原子性。
 （1）在每一个volatile写操作前面插入一个StoreStore屏障。这确保了在进行volatile写之前前面的所有普通的写操作都已经刷新到了内存。
@@ -94,6 +97,7 @@ spring 中涉及的设计模式：单例（spring bean 作用域），工厂模�
 concurrenthashmap 1.7 segment 分段锁；1.8 没有hash冲突扩容cas + 冲突 synchronized + 线程去帮助扩容，红黑树。
 hashmap 1.7 头插法 成环，hashmap 1.8 尾插法
 hashcode hashcode ^ hashcode >>> 16  (n-1) & hashcode  
+扩容：当哈希表中的条目数超出了加载因子与当前容量的乘积时，并且要存放的位置已经有元素了（hash碰撞），必须满足这两个条件，才要对该哈希表进行 rehash 操作，会将容量扩大为原来两倍。
 
 k8s: yaml(kind(depolyment)，镜像image, replicas副本数量，动态扩缩容（scale,replicas)
 docker:from(基础镜像)，copy,add，maintainer（所有者），run, cmd
@@ -118,3 +122,5 @@ jvm只有一个堆区（heap）被所有线程共享，堆区中不存放基本�
 
 redis(sds) embstr连续内存分配的缺点：分配给一个程序的物理内存是连续的；内存利用率低；有外碎片和内碎片问题
 raw 非连续内存分配的优点：分配给一个程序的物理内存是非连续的；更好的内存利用和管理；允许共享代码和数据（共享库等）；支持动态加载和动态链接.
+
+
