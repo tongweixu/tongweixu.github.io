@@ -6,7 +6,19 @@ synchorized：
 可重入性：死锁 state +1 -1。可见性：volatile 加速前后与主内存交互。抛异常：退出同步方法是否monitor。对象头：偏向锁，轻量级锁（自旋），重量级锁（挂起线程）
 synchorized 静态方法：类对象锁；普通方法：对象锁。 与 reetrantlock 对比：条件，公平，可中断（个线程t1通过lockInterruptibly()方法获取到一个可重入锁，并执行一个长时间的任务，另一个线程通过interrupt()方法就可以立刻打断t1线程的执行），需手动释放。
 
+reentrantlock 非公平：cas先获取一遍锁
+              可中断：lockInterruptibly()方法获取到一个可重入锁，并执行一个长时间的任务，另一个线程通过interrupt()方法就可以立刻打断t1线程的执行，来获取t1持有的那个可重入锁
+              可重入：volatile 状态量+1
+              独占锁：只能有 一个线程可 以 获取该锁,其他获取该锁 的线程会被阻塞而被放入该锁的 AQS 阻塞队列里面
+
 volatile: 内存屏障（load读 store写，刷主内存，防重排序）可见性，i++ 读，写非原子性。
+（1）在每一个volatile写操作前面插入一个StoreStore屏障。这确保了在进行volatile写之前前面的所有普通的写操作都已经刷新到了内存。
+
+（2）在每一个volatile写操作后面插入一个StoreLoad屏障。这样可以避免volatile写操作与后面可能存在的volatile读写操作发生重排序。
+
+（3）在每一个volatile读操作后面插入一个LoadLoad屏障。这样可以避免volatile读操作和后面普通的读操作进行重排序。
+
+（4）在每一个volatile读操作后面插入一个LoadStore屏障。这样可以避免volatile读操作和后面普通的写操作进行重排序。
 
 乐观锁cas,compare and swap 比对交换 旧值，新值，当前内存值，场景读多于写。
 悲观锁，写多于读。
