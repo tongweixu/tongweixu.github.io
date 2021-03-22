@@ -94,6 +94,11 @@ spring bean循环依赖：1、构造器循环依赖,srping 无法解决，抛出
 spring bean 作用域：singleton 单例、prototype 每次从容器中获取创建新的、request 每次http请求创建新的bean,session,@scope
 适配器模式：目标接口，被适配类，适配类
 spring 中涉及的设计模式：单例（spring bean 作用域），工厂模式（ioc）, 代理（aop）,适配器模式（springmvc），单例
+装饰器模式组成：
+抽象组件角色(Component): 定义可以动态添加任务的对象的接口
+具体组件角色(ConcreteComponent)：定义一个要被装饰器装饰的对象，即 Component 的具体实现
+抽象装饰器(Decorator): 维护对组件对象和其子类组件的引用
+具体装饰器角色(ConcreteDecorator)：向组件添加新的职责
 concurrenthashmap 1.7 segment 分段锁；1.8 没有hash冲突扩容cas + 冲突 synchronized + 线程去帮助扩容，红黑树。
 hashmap 1.7 头插法 成环，hashmap 1.8 尾插法
 hashcode hashcode ^ hashcode >>> 16  (n-1) & hashcode  
