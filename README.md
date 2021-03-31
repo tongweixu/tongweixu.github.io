@@ -130,7 +130,7 @@ hashmap 1.7 头插法 成环，hashmap 1.8 尾插法
 hashcode hashcode ^ hashcode >>> 16  (n-1) & hashcode  
 扩容：当哈希表中的条目数超出了加载因子与当前容量的乘积时，并且要存放的位置已经有元素了（hash碰撞），必须满足这两个条件，才要对该哈希表进行 rehash 操作，会将容量扩大为原来两倍。
 
-k8s: yaml(kind(depolyment)，镜像image, replicas副本数量，动态扩缩容（scale,replicas)
+k8s: yaml(kind(depolyment)，镜像image, replicas副本数量，动态扩缩容（scale,replicas),HPA（自动伸缩）
 docker:from(基础镜像)，copy,add，maintainer（所有者），run, cmd
 
 1. JVM栈 (Java Virtual Machine Stacks) 
